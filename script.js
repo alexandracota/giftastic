@@ -12,43 +12,52 @@ var animalArray = [
 	"bee", 
 	"cow"
 	];
-	
 
 
-//displayAnimalGif function re-renders the HTML to display the appropriate content.
+
+//Display animal GIF
 function displayAnimalGif () {
+	//When an animal button is clicked,
+	$("#animal-buttons").on('click', '.animal-button' , function() {
 	
-	///========== REVIEW HOW TO USE ATTR ===============///
-	var animal = $(animalArray).val("data-animal");
-	console.log(animal);
-	///========== REVIEW HOW TO USE ATTR ===============///
+		// console.log($(this).attr('data-animal'))
 
-	var apiKey = "dc6zaTOxFJmzC";
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + apiKey;
-	console.log(queryURL);
+		var animal = $(this).attr('data-animal');
 
-	//Ajax call for the specific animal button being clicked.
-	$.ajax({
-		url: queryURL,
-		method: "GET"
-	}).done(function(response) {
-		console.log(response);
-		
-		//For loop to pull first 10 images.
-		for (var b = 0; b < 10; b++) {
+		//URL and API key.
+		var apiKey = "dc6zaTOxFJmzC";
+		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + apiKey;
+		console.log(queryURL);
 
-		//Store image data.
-		var imgURL = response.data[b].images.preview_gif.url;
+		//Ajax call for the specific animal button being clicked.
+		$.ajax({
+			url: queryURL,
+			method: "GET"
+		}).done(function(response) {
+			console.log(response);
+			
+			//For loop to pull first 10 images.
+			for (var b = 0; b < 11; b++) {
 
-		//Create element to have image displayed.
-		var animalDiv = $("<img>").attr("src", imgURL);	
+			//Store image data.
+			var imgURL = response.data[b].images.downsized_still.url;
 
-		//Display the images
-		$("#animals").prepend(animalDiv);
+			//Create element to have image displayed.
+			var animalDiv = $("<img>").attr("src", imgURL);	
 
-		};
+			//Display the images
+			$("#animals").prepend(animalDiv);
+
+			};
+		});
 	});
 };
+
+
+
+
+
+
 
 //Dynamically create buttons.
 function renderButtons() {
@@ -61,7 +70,7 @@ function renderButtons() {
 		//Add class to button.
 		a.addClass("animal-button animal");
 		//Add data attribute with a value of the animal at index i
-		a.val("data-animal", animalArray[i]);
+		a.attr("data-animal", animalArray[i]);
 		//Provide the button's text with the value of the movie at index i.
 		a.text(animalArray[i]);
 		//Append animal buttons to element with animal-buttons ID in HTML
@@ -69,8 +78,14 @@ function renderButtons() {
 	};
 };
 
+
+
+
+
+
+
 //Click event listener to all elements with an ID of animal-buttons.
-$(document).on("click", "#animal-buttons", displayAnimalGif);
+$(document).on("click", ".animal-button", displayAnimalGif);
 
 //When another animal is added by the user...
 $("#addAnimal").on("click", function(event) {
@@ -79,7 +94,7 @@ $("#addAnimal").on("click", function(event) {
 	//Get the value of the animal input.
 	var animal = $("#animal-input").val().trim();
 	//Push the animal to the animals buttons
-	animals.push(animal);
+	animalArray.push(animal);
 	//Render buttons to include the new animal button.
 	renderButtons();
 });
@@ -89,3 +104,18 @@ renderButtons();
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
