@@ -53,9 +53,10 @@ function displayAnimalGif () {
 			method: "GET"
 		}).done(function(response) {
 			console.log(response);
+			
 
 			//For loop to pull first 10 images.
-			for (var b = 0; b < 11; b++) {
+			for (var b = 0; b < 10; b++) {
 
 				//Store image data.
 				var stillImage = response.data[b].images.downsized_still.url;
@@ -72,12 +73,11 @@ function displayAnimalGif () {
 				console.log(animalDiv);
 
 				//Display the images
+				
 				$("#animals").prepend(animalDiv);
 
 			};
 		});
-
-		$(".animals")
 
 	});
 };
@@ -99,6 +99,7 @@ function renderButtons() {
 		//Provide the button's text with the value of the movie at index i.
 		a.text(animalArray[i]);
 		//Append animal buttons to element with animal-buttons ID in HTML
+		
 		$("#animal-buttons").append(a);
 	};
 };
@@ -119,6 +120,7 @@ $("#addAnimal").on("click", function(event) {
 	//Render buttons to include the new animal button.
 	renderButtons();
 });
+
 
 displayAnimalGif();
 renderButtons();
