@@ -13,10 +13,28 @@ var animalArray = [
 	"cow"
 	];
 
+$(document).on('click', '.gif' , function() {
+	if ($(this).attr('data-playing') === "false") {
 
+		$(this).attr('src', $(this).attr('data-moving'));
+		$(this).attr('data-playing', "true");
+	} else {
+
+		$(this).attr('src', $(this).attr('data-still'));
+		$(this).attr('data-playing', "false");
+	}
+	//If this is playing
+
+	//If this is not playing
+
+});
 
 //Display animal GIF
 function displayAnimalGif () {
+
+
+
+
 	//When an animal button is clicked,
 	$("#animal-buttons").on('click', '.animal-button' , function() {
 	
@@ -35,27 +53,34 @@ function displayAnimalGif () {
 			method: "GET"
 		}).done(function(response) {
 			console.log(response);
-			
+
 			//For loop to pull first 10 images.
 			for (var b = 0; b < 11; b++) {
 
-			//Store image data.
-			var imgURL = response.data[b].images.downsized_still.url;
+				//Store image data.
+				var stillImage = response.data[b].images.downsized_still.url;
+				var movingImage = response.data[b].images.downsized.url;
 
-			//Create element to have image displayed.
-			var animalDiv = $("<img>").attr("src", imgURL);	
+				//Create element to have image displayed.
+				var animalDiv = $("<img>")
+				.attr("src", stillImage)
+				.attr("data-still", stillImage)
+				.attr("data-moving", movingImage)
+				.attr("data-playing", "false")
+				//add classes to each gif being displayed.
+				.addClass("gif");	
+				console.log(animalDiv);
 
-			//Display the images
-			$("#animals").prepend(animalDiv);
+				//Display the images
+				$("#animals").prepend(animalDiv);
 
 			};
 		});
+
+		$(".animals")
+
 	});
 };
-
-
-
-
 
 
 
@@ -77,10 +102,6 @@ function renderButtons() {
 		$("#animal-buttons").append(a);
 	};
 };
-
-
-
-
 
 
 
