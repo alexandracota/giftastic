@@ -44,7 +44,7 @@ function displayAnimalGif () {
 
 		//URL and API key.
 		var apiKey = "dc6zaTOxFJmzC";
-		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + apiKey;
+		var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + apiKey;
 		console.log(queryURL);
 
 		//Ajax call for the specific animal button being clicked.
