@@ -23,22 +23,14 @@ $(document).on('click', '.gif' , function() {
 		$(this).attr('src', $(this).attr('data-still'));
 		$(this).attr('data-playing', "false");
 	}
-	//If this is playing
-
-	//If this is not playing
 
 });
 
 //Display animal GIF
 function displayAnimalGif () {
 
-
-
-
 	//When an animal button is clicked,
-	$("#animal-buttons").on('click', '.animal-button' , function() {
-	
-		// console.log($(this).attr('data-animal'))
+	$(".animal-button").on('click' , function() {
 
 		var animal = $(this).attr('data-animal');
 
@@ -56,7 +48,7 @@ function displayAnimalGif () {
 			
 
 			//For loop to pull first 10 images.
-			for (var b = 0; b < 10; b++) {
+			for (var b = 0; b < 20; b++) {
 
 				//Store image data.
 				var stillImage = response.data[b].images.downsized_still.url;
@@ -72,9 +64,12 @@ function displayAnimalGif () {
 				.addClass("gif");	
 				console.log(animalDiv);
 
+				// //empty div with animals id
+				// $('#animals').empty();
+
 				//Display the images
 				
-				$("#animals").prepend(animalDiv);
+				$("#animals").append(animalDiv);
 
 			};
 		});
@@ -87,11 +82,11 @@ function displayAnimalGif () {
 //Dynamically create buttons.
 function renderButtons() {
 	//Clear div contents
-	$("#animal-buttons").empty();
+	$(".animal-buttons").empty();
 	//For loop to iterate through the animals in the array.
 	for (var i = 0; i < animalArray.length; i++) {
 		//Create button.
-		var a = $("<button>");
+		var a = $("<button type='button' class='btn btn-primary'>");
 		//Add class to button.
 		a.addClass("animal-button animal");
 		//Add data attribute with a value of the animal at index i
@@ -100,7 +95,7 @@ function renderButtons() {
 		a.text(animalArray[i]);
 		//Append animal buttons to element with animal-buttons ID in HTML
 		
-		$("#animal-buttons").append(a);
+		$(".animal-buttons").append(a);
 	};
 };
 
@@ -110,7 +105,7 @@ function renderButtons() {
 $(document).on("click", ".animal-button", displayAnimalGif);
 
 //When another animal is added by the user...
-$("#addAnimal").on("click", function(event) {
+$(".add-animal").on("click", function(event) {
 	//Prevent default.
 	event.preventDefault();
 	//Get the value of the animal input.

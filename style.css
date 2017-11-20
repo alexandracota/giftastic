@@ -1,6 +1,32 @@
 .container {
-	margin: 0 auto;
+	width: 100%;
+}
+
+.title {
 	padding-top: 100px;
+	font-family: 'Concert One', cursive;
+	background-color: #4286f4;
+	font-size: 75px;
+}
+
+.animal-buttons {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.btn-primary {
+	background-color: #000000;
+	font-family: 'Concert One', cursive;
+	margin-right: 20px;
+}
+
+#animal-form {
+	font-family: 'Concert One', cursive;
+	font-size: 20px
+}
+
+.add-animal {
+	margin-top: 20px;
 }
 
 img {
@@ -8,6 +34,3 @@ img {
 	width: 200px;
 }
 
-button {
-	margin: 5px;
-}
